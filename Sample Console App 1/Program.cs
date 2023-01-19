@@ -39,15 +39,9 @@ while (!folder.isValidPathAndExists || tries >= 10)
 
 //Get all the files in the top directory
 string[] filesJPG = Directory.GetFiles(folder.pathUri, "*.jpg", SearchOption.TopDirectoryOnly);
-string[] filesPNG = Directory.GetFiles(folder.pathUri, "*.png", SearchOption.TopDirectoryOnly);
 
 if (filesJPG.Length > 0) {
      folder.ProcessFiles(filesJPG, ".jpg", regex, results);
-}
-
-if (filesPNG.Length > 0)
-{
-    folder.ProcessFiles(filesPNG, ".png", regex, results); //Commenting this out for now untl I can figure out how pngs work
 }
 
 Console.WriteLine(value: feedback.SUCCESSFULLY_CHANGED + results.successfullyChanged + feedback.IMAGES);
@@ -56,6 +50,4 @@ Console.WriteLine(value: feedback.RESULTS_LOCATION + folder.pathUri);
 Console.WriteLine(value: feedback.THANK_YOU);
 Console.ReadLine();
 
-
 //Still need to create output file and push successful/unsuccessful strings
-//Fix PNG editing

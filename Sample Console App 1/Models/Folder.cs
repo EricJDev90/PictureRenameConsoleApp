@@ -66,7 +66,7 @@ namespace PictureRenameConsoleApp.Models
                 {
                     try
                     {
-                        PropertyItem propItem = image.GetPropertyItem(36867); //Property 36867 is the date/time a picture was taken
+                        PropertyItem propItem = image.GetPropertyItem(36867); //Property 36867 is the date/time a picture was taken for jpg
 
                         //Parse Date time
                         dateTaken = regexPattern.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 4); //Change YYYY/MM/DD HH/MM/SS to YYYY-MM-DD HH-MM-SS

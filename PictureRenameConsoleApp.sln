@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureRenameConsoleApp", "Sample Console App 1\PictureRenameConsoleApp.csproj", "{B5F38833-99B1-4260-93E0-205ED930B70F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5F38833-99B1-4260-93E0-205ED930B70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F38833-99B1-4260-93E0-205ED930B70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F38833-99B1-4260-93E0-205ED930B70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F38833-99B1-4260-93E0-205ED930B70F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D0ABB2B-65AB-4ABB-AE73-846B96600186}
+	EndGlobalSection
+EndGlobal

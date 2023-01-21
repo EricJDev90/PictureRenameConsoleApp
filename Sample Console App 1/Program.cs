@@ -1,5 +1,6 @@
 ﻿using PictureRenameConsoleApp;
 using PictureRenameConsoleApp.Models;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
 
 
@@ -11,43 +12,67 @@ Regex regex = new Regex(":|\\0");
 ProcessingResult results = new ProcessingResult();
 
 //Get path we need to work with
-while (!folder.isValidPathAndExists || tries >= 10)
+while (!folder.isValidPathAndExists || tries >= 10 || folder.filesJPG.Length == 0)
 {
     Console.WriteLine(value: feedback.BEGIN_TEXT);
     var enteredPath = Console.ReadLine();
 
-    if (enteredPath != null && enteredPath.Length > 3)
-    {
-        folder.CheckIsValidPathAndExists(enteredPath);
-    }
-    if (enteredPath == null || enteredPath.Length == 0)
-    {
-        Console.WriteLine(value: feedback.ERROR_NULL_PATH);
-    }
-    if (enteredPath.Length is > 0 and < 3)
-    {
-        Console.WriteLine(value: feedback.ERROR_PATH_TOO_SHORT);
-    }
-    tries++;
     if (tries >= 10)
     {
         Console.WriteLine(value: feedback.ERROR_TOO_MANY_FAILED_ATTEMPTS);
         Console.ReadLine();
         Environment.Exit(0);
     }
+
+    if (enteredPath != null && enteredPath.Length > 3)
+    {
+        folder.CheckIsValidPathAndExists(enteredPath);
+        if (folder.isValidPathAndExists)
+        {
+            //Valid path, check for files a top directory
+            folder.filesJPG = Directory.GetFiles(folder.pathUri, "*.jpg", SearchOption.TopDirectoryOnly);
+            if (folder.filesJPG.Length == 0)
+            {
+                Console.WriteLine(value: feedback.ERROR_NO_JPG_FOUND);
+                tries++;
+                continue;
+            }
+        }
+    }
+    if (enteredPath == null || enteredPath.Length == 0)
+    {
+        Console.WriteLine(value: feedback.ERROR_NULL_PATH);
+        tries++;
+        continue;
+    }
+    if (enteredPath.Length is > 0 and < 3)
+    {
+        Console.WriteLine(value: feedback.ERROR_PATH_TOO_SHORT);
+        tries++;
+        continue;
+    }
+    if (!folder.isValidPathAndExists)
+    {
+        Console.WriteLine(value: feedback.PATH_DOESNT_EXIST);
+        tries++;
+        continue;
+    }
+   
 }
 
-//Get all the files in the top directory
-string[] filesJPG = Directory.GetFiles(folder.pathUri, "*.jpg", SearchOption.TopDirectoryOnly);
+Console.WriteLine();
+Console.WriteLine(value: feedback.BEGIN_PROCESSING);
+Console.WriteLine();
 
-if (filesJPG.Length > 0) {
-     folder.ProcessFiles(filesJPG, ".jpg", regex, results);
+if (folder.filesJPG.Length > 0) {
+     folder.ProcessFiles(folder.filesJPG, ".jpg", regex, results);
 }
 
+results.generateOutputFile(folder.pathUri, feedback);
+
+Console.WriteLine();
 Console.WriteLine(value: feedback.SUCCESSFULLY_CHANGED + results.successfullyChanged + feedback.IMAGES);
 Console.WriteLine(value: feedback.FAILED_CHANGED + results.failedToChange + feedback.IMAGES);
 Console.WriteLine(value: feedback.RESULTS_LOCATION + folder.pathUri);
 Console.WriteLine(value: feedback.THANK_YOU);
 Console.ReadLine();
-
-//Still need to create output file and push successful/unsuccessful strings

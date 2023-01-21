@@ -12,12 +12,16 @@ namespace PictureRenameConsoleApp.Models
         public bool isValidPathAndExists { get; set; }
         public MessageStrings feedback { get; set; }
 
+        public string[] filesJPG { get; set; }
+
 
         public Folder()
         {
             pathUri = "";
             totalFiles = 0;
+            isValidPathAndExists = false;
             feedback = new MessageStrings();
+            filesJPG = new string[] { };
         }
 
 

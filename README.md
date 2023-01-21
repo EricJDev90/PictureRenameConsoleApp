@@ -1,6 +1,8 @@
 # PictureRenameConsoleApp
 Small command line tool to rename all jpg photos in a location to the date and time the photo was taken.
 
+*This app will only search for JPG files*
+
 
 ## How it works
 

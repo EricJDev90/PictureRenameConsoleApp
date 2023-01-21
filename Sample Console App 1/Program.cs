@@ -11,7 +11,7 @@ int tries = 0;
 Regex regex = new Regex(":|\\0");
 ProcessingResult results = new ProcessingResult();
 
-//Get path we need to work with
+//Get path and validate
 while (!folder.isValidPathAndExists || tries >= 10 || folder.filesJPG.Length == 0)
 {
     Console.WriteLine(value: feedback.BEGIN_TEXT);
@@ -64,11 +64,10 @@ Console.WriteLine();
 Console.WriteLine(value: feedback.BEGIN_PROCESSING);
 Console.WriteLine();
 
-if (folder.filesJPG.Length > 0) {
-     folder.ProcessFiles(folder.filesJPG, ".jpg", regex, results);
-}
-
+//Process the files, output results
+folder.ProcessFiles(folder.filesJPG, ".jpg", regex, results);
 results.generateOutputFile(folder.pathUri, feedback);
+
 
 Console.WriteLine();
 Console.WriteLine(value: feedback.SUCCESSFULLY_CHANGED + results.successfullyChanged + feedback.IMAGES);
